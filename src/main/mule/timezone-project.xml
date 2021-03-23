@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="6a9536de-978b-456d-a005-725e06212e70" basePath="/timezone" >
+		<http:listener-connection host="0.0.0.0" port="8085" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="df4582e7-0c28-45a9-aef8-737141494577" basePath="/api/timezone" >
+		<http:request-connection host="worldtimeapi.org"/>
+	</http:request-config>
+	<flow name="timezone-projectFlow" doc:id="d3f98397-fd7d-4f94-93bc-547c9b6b2aec" >
+		<http:listener doc:name="Listener" doc:id="a035d772-7ea2-42a9-a33c-58830086b32b" config-ref="HTTP_Listener_config" path="{region}/{city}"/>
+		<ee:transform doc:name="Transform Message" doc:id="974566de-4a13-4c36-af94-edf8ed6a1390" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+
+---
+{
+	region: attributes.uriParams.region,
+	city: attributes.uriParams.city
+	
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<http:request method="GET" doc:name="Request" doc:id="9cd15bc3-35cb-41ab-b64d-ee363dd07dad" config-ref="HTTP_Request_configuration" path="/{region}/{city}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	city : attributes.uriParams.city,
+	region : attributes.uriParams.region
+}]]]></http:uri-params>
+		</http:request>
+	</flow>
+</mule>
