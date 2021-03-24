@@ -6,7 +6,7 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="6a9536de-978b-456d-a005-725e06212e70" basePath="/timezone" >
-		<http:listener-connection host="0.0.0.0" port="8085" />
+		<http:listener-connection host="0.0.0.0" port="8083" />
 	</http:listener-config>
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="df4582e7-0c28-45a9-aef8-737141494577" basePath="/api/timezone" >
 		<http:request-connection host="worldtimeapi.org"/>
