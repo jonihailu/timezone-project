@@ -37,5 +37,6 @@ output application/java
 	region : attributes.uriParams.region
 }]]]></http:uri-params>
 		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="822cc589-ea21-48fc-a858-48f36bfc6e57" message="#[payload]"/>
 	</flow>
 </mule>
