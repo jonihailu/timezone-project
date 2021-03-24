@@ -11,8 +11,11 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="df4582e7-0c28-45a9-aef8-737141494577" basePath="/api/timezone" >
 		<http:request-connection host="worldtimeapi.org"/>
 	</http:request-config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="7480d096-a5b4-44ca-b389-e1538ce69687" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
 	<flow name="timezone-projectFlow" doc:id="d3f98397-fd7d-4f94-93bc-547c9b6b2aec" >
-		<http:listener doc:name="Listener" doc:id="a035d772-7ea2-42a9-a33c-58830086b32b" config-ref="HTTP_Listener_config" path="{region}/{city}"/>
+		<http:listener doc:name="Listener" doc:id="a035d772-7ea2-42a9-a33c-58830086b32b" config-ref="HTTP_Listener_config1" path="{region}/{city}"/>
 		<ee:transform doc:name="Transform Message" doc:id="974566de-4a13-4c36-af94-edf8ed6a1390" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
