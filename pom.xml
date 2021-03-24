@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<app.runtime>4.3.0-20210304</app.runtime>
+		<app.runtime>4.3.0</app.runtime>
 		<mule.maven.plugin.version>3.4.2</mule.maven.plugin.version>
 	</properties>
 
@@ -31,17 +31,16 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-				   <cloudHubDeployment>
-            <muleVersion>4.3.0</muleVersion> 
-            <username>johnnymike2021</username> 
-            <password>Muluken21</password> 
-            <applicationName>timezone-service</applicationName> 
-            <environment>sandbox</environment> 
-            <businessGroup>self</businessGroup>
-            <uri>https://anypoint.mulesoft.com</uri> 
-            <workerType>Micro</workerType> 
-            <workers>1</workers>
-          </cloudHubDeployment>
+				  <cloudHubDeployment>
+	            <uri>https://anypoint.mulesoft.com</uri>  
+	            <muleVersion>4.3.0</muleVersion> 
+	            <username>johnnymike2021</username> 
+	            <password>Muluken21</password> 
+	            <applicationName>timezone-service</applicationName> 
+	            <environment>sandbox</environment> 
+	            <workerType>Micro</workerType> 
+	            <workers>1</workers>
+	          </cloudHubDeployment>
 				</configuration>
 			</plugin>
 		</plugins>
